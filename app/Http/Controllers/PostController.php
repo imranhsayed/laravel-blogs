@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+		$posts = \App\Post::all();
+    	return view( 'show-posts', compact( 'posts' ) );
     }
 
     /**
@@ -55,7 +56,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+    	return view( 'update-post', compact( 'post' ) );
     }
 
     /**
@@ -78,7 +79,21 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+	    $this->validate( request(), [      // validates the form inputs and makes $errors->all() array available to you container errors if not filled.
+		    'title' => 'required',
+		    'content' => 'required',
+		    'author' => 'required',
+		    'category' => 'required'
+	    ] );
+
+	    $post->title = $request->title;
+	    $post->content = $request->content;
+	    $post->author = $request->author;
+	    $post->category = $request->category;
+	    $post->save();
+
+	    return redirect( "posts/$post->id" )->with( 'success', 'Post successfully updated' );
+
     }
 
     /**
@@ -89,7 +104,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect( '/posts' )->with( 'success', 'Post Successfully deleted' );
     }
 
     function validate_form() {

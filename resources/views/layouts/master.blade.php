@@ -26,10 +26,10 @@
                 <a class="nav-link" href="{{url('/posts/create')}}">Create Blogs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Update Blogs</a>
+                <a class="nav-link" href="">Update Blogs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">View Blogs</a>
+                <a class="nav-link" href="{{ url( '/posts' ) }}">View Blogs</a>
             </li>
         </ul>
     </div>
