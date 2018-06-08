@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-		$posts = \App\Post::all();
+		$posts = \App\Post::where( 'category', 'footballer' )->paginate(10);
     	return view( 'show-posts', compact( 'posts' ) );
     }
 
